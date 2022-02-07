@@ -8,6 +8,7 @@ interface User {
   password: string;
   fullname?: string;
 }
+
 class Usermode {
   private static filepath: string;
   private static users: User;

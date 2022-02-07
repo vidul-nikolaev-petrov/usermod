@@ -1,9 +1,11 @@
 {
   "name": "usermode",
-  "version": "1.0.0",
+  "version": "1.0.2",
+  "main": "src/index.ts",
   "description": "Minimal usermode-like library for node.",
-  "author": "Vidul Nikolaev Petrov",
-  "licence": "MIT",
+  "author": "Vidul Nikolaev Petrov <vidul.petrov@gmail.com>",
+  "license": "MIT",
+  "keywords": [],
   "engines": {
     "node": ">= 16.13 <17"
   },
@@ -47,5 +49,9 @@
   "dependencies": {
     "js-sha512": "^0.8.0",
     "volta": "^0.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vidul-nikolaev-petrov/usermode.git"
   }
 }
