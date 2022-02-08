@@ -84,31 +84,33 @@ describe("Usermode", () => {
   });
 
   it("set user by name", () => {
-    const userDataFalse = data.tedi;
-    const userDataTrue = Usermode.getUser(data.tedi.username);
-    userDataFalse.password = "wrong pass";
-    const userTediFalse = Usermode.setUser(userDataFalse, {
-      password: "new pass 1",
+    const userData = Usermode.getUser(data.tedi.username);
+    const user = Usermode.setUser(userData, {
+      password: "new pass",
       fullname: "Tedi M",
+      __force: true,
     });
-    const userTediTrue = Usermode.setUser(userDataTrue, {
-      password: "pass-1",
-      fullname: "Tedi M",
-    });
-    expect(userTediFalse).toBeUndefined();
-    expect(userTediTrue).toBeInstanceOf(Object);
-    const userTedi = Usermode.getUser(data.tedi.username);
+    expect(user.username).toEqual(userData.username);
+    expect(user.password).toEqual(sha("new pass"));
+    expect(user.fullname).toEqual("Tedi M");
+    expect(() => Usermode.setUser({ username: "N/A" })).toThrow(
+      new Error('Username "N/A" does not exist!')
+    );
+    expect(() =>
+      Usermode.setUser(
+        {
+          username: user.username,
+          password: "N/A",
+        },
+        { password: "pass-3", fullname: "New fullname" }
+      )
+    ).toThrow(new Error('Password "N/A" does not match!'));
+  
     const filedata = fs.readFileSync(filepath);
     const userdata = JSON.parse(filedata.toString());
-    expect(userdata.tedi.password).toEqual(userTedi.password);
-    expect(userdata.tedi.fullname).toEqual(userTedi.fullname);
-    expect(userTediTrue.password).toEqual(sha("pass-1"));
-    expect(userTediTrue.fullname).toEqual("Tedi M");
-    const userTediNoFullname = Usermode.setUser(userTediTrue, {
-      password: "pass-2",
-    });
-    expect(userTediNoFullname.password).toEqual(sha("pass-2"));
-    expect(userTediNoFullname.fullname).toEqual("Tedi M");
+    expect(user.username).toEqual(userdata.tedi.username);
+    expect(user.password).toEqual(userdata.tedi.password);
+    expect(user.fullname).toEqual(userdata.tedi.fullname);
   });
 
   it("add user", () => {
