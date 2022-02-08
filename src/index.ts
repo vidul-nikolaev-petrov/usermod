@@ -85,4 +85,4 @@ class Usermode {
   }
 }
 
-module.exports = { Usermode };
+export { Usermode };

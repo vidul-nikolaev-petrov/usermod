@@ -25,5 +25,9 @@ build/
 # Optional eslint cache
 .eslintcache
 
+# JS files
+src/
+__tests__/
+
 # Misc
 .DS_Store
