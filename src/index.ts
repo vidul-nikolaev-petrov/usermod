@@ -4,8 +4,14 @@ import path from "path";
 import { sha512_256 as sha } from "js-sha512";
 
 interface User {
-  username: string;
-  password: string;
+  readonly username: string;
+  readonly password: string;
+  fullname?: string;
+}
+
+interface UserSettings {
+  username?: string;
+  password?: string;
   fullname?: string;
 }
 
@@ -15,6 +21,9 @@ class Usermode {
   static dirpath: string;
 
   static init(filepath: string): void {
+    if (!fs.existsSync(filepath)) {
+      fs.writeFileSync(filepath, "{}");
+    }
     this.filepath = filepath;
     this.users = this.readFile();
     this.dirpath = path.dirname(this.filepath);
@@ -37,16 +46,23 @@ class Usermode {
     update: {
       password?: string;
       fullname?: string;
+      __force?: boolean;
     }
-  ): User | void {
+  ): User {
     const dbUser: any = this.getUser(user.username);
+    const data: UserSettings = {};
 
-    if (!dbUser) return;
-    if (dbUser.password !== user.password) return;
+    if (!dbUser) {
+      throw new Error(`Username "${user.username}" does not exist!`);
+    }
 
-    user.password = update.password ? sha(update.password) : user.password;
-    user.fullname = update.fullname || user.fullname;
-    this.users[user.username] = user;
+    if (dbUser.password !== user.password && !update.__force) {
+      throw new Error(`Password "${user.password}" does not match!`);
+    }
+
+    data.password = update.password ? sha(update.password) : dbUser.password;
+    data.fullname = update.fullname || dbUser.fullname;
+    this.users[user.username] = { ...data, username: dbUser.username };
     this.writeFile();
 
     return this.users[user.username];
