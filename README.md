@@ -30,7 +30,8 @@ Usermode.init("./path/to/file.json");
  * @memberof Usermode
  * @static
  * @param {User} user
- * @returns {User} or @throws {Username "username" already exists!}
+ * @returns {User} or 
+ * @throws {Username "username" already exists!}
  */
 const user = Usermode.addUser({
     username: "user_1",
