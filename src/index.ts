@@ -1,4 +1,4 @@
-const _window = global.window || { require: require };
+const _window = global.window || { require };
 const fs = _window.require("fs");
 const path = _window.require("path");
 const { sha512_256: sha } = _window.require("js-sha512");

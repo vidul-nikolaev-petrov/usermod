@@ -25,7 +25,7 @@ import { Usermode } from "usermode";
 Usermode.init("./path/to/file.json");
 
 /**
- * Add new user
+ * Add user
  * @function addUser
  * @memberof Usermode
  * @static
