@@ -1,29 +1,85 @@
-# README #
+# Usermode
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Usermode is a JavaScript library for dealing with users within SPA.
 
-### What is this repository for? ###
+## Installation
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+```bash
+npm install usermode
+```
 
-### How do I get set up? ###
+## Usage
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+```javascript
+import { Usermode } from "usermode";
 
-### Contribution guidelines ###
+/**
+ * Initialize Usermode
+ * If the file does not exists, it will be created
+ * @function init
+ * @memberof Usermode
+ * @static
+ * @param {string} filepath
+ * @returns {void}
+ */
+Usermode.init("./path/to/file.json");
 
-* Writing tests
-* Code review
-* Other guidelines
+/**
+ * Add new user
+ * @function addUser
+ * @memberof Usermode
+ * @static
+ * @param {User} user
+ * @returns {User} or @throws {Username "username" already exists!}
+ */
+const user = Usermode.addUser({
+    username: "user_1",
+    password: "pass_1",
+    fullName: "User One", // optional
+});
 
-### Who do I talk to? ###
+/**
+ * Get user
+ * @function getUser
+ * @memberof Usermode
+ * @static
+ * @param {string} username
+ * @returns {User | void}
+ */
+const user = Usermode.getUser("username");
 
-* Repo owner or admin
-* Other community or team contact
+/**
+ * Set user
+ * Changes the password and / or full name
+ * By default the password match is mandatory,
+ * unless the __force parameter is set to true
+ * @function setUser
+ * @memberof Usermode
+ * @static
+ * @param {User} user
+ * @param {password?, fullname?, __force?}
+ * @returns {User | void}
+ */
+const user = Usermode.setUser(
+    {
+        username: "user_1",
+        password: "pass_1", 
+    },
+    {
+        update: {
+            pass: "pass_2",
+            fullename: "User One updated",
+            __force: true, // false by default
+        }
+    }
+);
+
+```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
