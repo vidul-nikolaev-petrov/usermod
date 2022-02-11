@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import fs from "fs";
-import path from "path";
-import { sha512_256 as sha } from "js-sha512";
+const _window = global.window || { require: require };
+const fs = _window.require("fs");
+const path = _window.require("path");
+const { sha512_256: sha } = _window.require("js-sha512");
 
 interface User {
   readonly username: string;
@@ -41,6 +41,24 @@ class Usermode {
     return this.users[username];
   }
 
+  static addUser(user: User): User {
+    const passHash = sha(user.password);
+
+    if (this.getUser(user.username)) {
+      throw new Error(`Username "${user.username}" already exists!`);
+    }
+
+    this.users[user.username] = {
+      username: user.username,
+      password: passHash,
+      fullname: user.fullname,
+    };
+
+    this.writeFile();
+
+    return this.users[user.username];
+  }
+
   static setUser(
     user: User,
     update: {
@@ -63,20 +81,6 @@ class Usermode {
     data.password = update.password ? sha(update.password) : dbUser.password;
     data.fullname = update.fullname || dbUser.fullname;
     this.users[user.username] = { ...data, username: dbUser.username };
-    this.writeFile();
-
-    return this.users[user.username];
-  }
-
-  static addUser(user: User): User {
-    const passHash = sha(user.password);
-
-    this.users[user.username] = {
-      username: user.username,
-      password: passHash,
-      fullname: user.fullname,
-    };
-
     this.writeFile();
 
     return this.users[user.username];

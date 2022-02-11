@@ -1,7 +1,7 @@
-import proxyquire from "proxyquire";
-import { fs } from "memfs";
-import path from "path";
-import { sha512_256 as sha } from "js-sha512";
+const proxyquire = require("proxyquire");
+const fs = require("memfs");
+const path = require("path");
+const { sha512_256: sha } = require("js-sha512");
 
 const fsMock = {
   mkdirSync: fs.mkdirSync,
@@ -105,7 +105,7 @@ describe("Usermode", () => {
         { password: "pass-3", fullname: "New fullname" }
       )
     ).toThrow(new Error('Password "N/A" does not match!'));
-  
+
     const filedata = fs.readFileSync(filepath);
     const userdata = JSON.parse(filedata.toString());
     expect(user.username).toEqual(userdata.tedi.username);
@@ -125,6 +125,15 @@ describe("Usermode", () => {
     expect(userdata.tester.password).toEqual(user.password);
     expect(userdata.tester.fullname).toEqual(user.fullname);
     expect(user.password).toEqual(data.__misc.passHash);
+  });
+
+  it("add user twice", () => {
+    const username = "tester";
+    const password = "pass";
+    Usermode.addUser({ username, password });
+    expect(() => Usermode.addUser({ username, password })).toThrow(
+      new Error('Username "tester" already exists!')
+    );
   });
 
   it("check missing home directiry", () => {
