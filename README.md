@@ -15,7 +15,7 @@ import { Usermode } from "usermode";
 
 /**
  * Initialize Usermode
- * If the file does not exists, it will be created
+ * If the file does not exist, it will be created
  * @function init
  * @memberof Usermode
  * @static
@@ -30,7 +30,7 @@ Usermode.init("./path/to/file.json");
  * @memberof Usermode
  * @static
  * @param {User} user
- * @returns {User} or 
+ * @returns {User} or
  * @throws {Username "username" already exists!}
  */
 const user = Usermode.addUser({
@@ -64,27 +64,44 @@ const user = Usermode.getUser("username");
 const user = Usermode.setUser(
     {
         username: "user_1",
-        password: "pass_1", 
+        password: "pass_1",
     },
     {
-        update: {
-            pass: "pass_2",
-            fullename: "User One updated",
-            __force: true, // false by default
-        }
+        pass: "pass_2",
+        fullename: "User One updated",
+        __force: true, // false by default
     }
 );
 
+/**
+ * Create user's home directory in the same 
+ * directory as `filepath` (see the `init` method)
+ * @function setHome
+ * @memberof Usermode
+ * @static
+ * @param {string} username
+ * @returns {string}
+ */
+Usermode.setHome(username);
+
+/**
+ * Get user's home directory
+ * @function getHome
+ * @memberof Usermode
+ * @static
+ * @param {string} username
+ * @returns {string | void}
+ */
+Usermode.getHome(username);
 ```
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-## Coauthor
-
-Теди (angelwaft)
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)

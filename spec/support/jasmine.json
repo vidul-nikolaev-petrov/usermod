@@ -1,6 +1,6 @@
 {
   "spec_dir": "spec",
-  "spec_files": ["../__tests__/*.test.ts"],
+  "spec_files": ["../tests/*.test.ts"],
   "helpers": ["helpers/**/*.?(m)js"],
   "env": {
     "stopSpecOnExpectationFailure": false,
