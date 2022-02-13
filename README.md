@@ -95,6 +95,8 @@ Usermode.setHome(username);
 Usermode.getHome(username);
 ```
 
+See more examples in the [unit tests](https://github.com/vidul-nikolaev-petrov/usermode/blob/main/tests/index.test.ts).
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

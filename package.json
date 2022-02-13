@@ -1,12 +1,12 @@
 {
   "name": "usermode",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "description": "Minimal usermode-like library for node.",
   "author": "Vidul Nikolaev Petrov <vidul.petrov@gmail.com>",
   "license": "MIT",
-  "keywords": ["users", "SPA"],
+  "keywords": ["users", "SPA", "NodeJS"],
   "engines": {
     "node": ">= 16.13 <17"
   },

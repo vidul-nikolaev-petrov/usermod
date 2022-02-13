@@ -27,7 +27,7 @@ build/
 
 # JS files
 src/
-__tests__/
+tests/
 
 # Misc
 .DS_Store
