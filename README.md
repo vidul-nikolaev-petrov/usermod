@@ -2,9 +2,6 @@
 
 Minimal usermode-like library for NodeJS.
 
-[![Build Status](https://travis-ci.org/vidul-nikolaev-petrov/usermode.svg?branch=main)](https://travis-ci.org/vidul-nikolaev-petrov/usermode)
-
-
 ## Installation
 
 ```bash
