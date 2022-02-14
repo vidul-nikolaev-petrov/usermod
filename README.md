@@ -1,6 +1,9 @@
 # Usermode
 
-Usermode is a JavaScript library for dealing with users within SPA.
+Minimal usermode-like library for NodeJS.
+
+[![Build Status](https://travis-ci.org/vidul-nikolaev-petrov/usermode.svg?branch=main)](https://travis-ci.org/vidul-nikolaev-petrov/usermode)
+
 
 ## Installation
 
@@ -106,4 +109,4 @@ Please make sure to update tests as appropriate.
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/vidul-nikolaev-petrov/usermode/blob/main/LICENSE)
