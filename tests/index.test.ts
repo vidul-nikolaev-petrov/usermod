@@ -11,7 +11,7 @@ const fsMock = {
   writeFileSync: fs.writeFileSync,
 };
 
-const { Usermode } = proxyquire("../src/index", {
+const { Usermode } = proxyquire("../src/index.ts", {
   fs: fsMock,
 });
 
@@ -147,5 +147,12 @@ describe("Usermode", () => {
     const homePath = Usermode.setHome(user.username);
     expect(fs.existsSync(homePath)).toBeTrue();
     expect(Usermode.getHome(user.username)).toEqual(homePath);
+  });
+
+  it("check password match", () => {
+    const matchTrue = Usermode.passMatch(data.vidul.username, "pass-2");
+    const matchFalse = Usermode.passMatch(data.vidul.username, "2-pass");
+    expect(matchTrue).toBeTrue();
+    expect(matchFalse).toBeFalse();
   });
 });

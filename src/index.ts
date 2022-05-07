@@ -67,7 +67,7 @@ class Usermode {
       __force?: boolean;
     }
   ): User {
-    const dbUser: any = this.getUser(user.username);
+    const dbUser: User | void = this.getUser(user.username);
     const data: Partial<UserSettings> = {};
 
     if (!dbUser) {
@@ -102,6 +102,20 @@ class Usermode {
     if (fs.existsSync(homePath)) {
       return homePath;
     }
+  }
+
+  static passMatch(username: string, password: string): boolean {
+    const dbUser: User| void = this.getUser(username);
+
+    if (!dbUser) {
+      throw new Error(`Username "${username}" does not exist!`);
+    }
+
+    if (dbUser.password !== sha(password)) {
+      return false;
+    }
+
+    return true;
   }
 }
 
