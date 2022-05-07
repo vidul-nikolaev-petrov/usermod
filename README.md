@@ -36,7 +36,7 @@ Usermode.init("./path/to/file.json");
 const user = Usermode.addUser({
     username: "user_1",
     password: "pass_1",
-    fullName: "User One", // optional
+    fullname: "User One", // optional
 });
 
 /**
