@@ -10,8 +10,8 @@ interface User {
 }
 
 interface UserSettings {
-  username?: string;
-  password?: string;
+  username: string;
+  password: string;
   fullname?: string;
 }
 
@@ -68,7 +68,7 @@ class Usermode {
     }
   ): User {
     const dbUser: any = this.getUser(user.username);
-    const data: UserSettings = {};
+    const data: Partial<UserSettings> = {};
 
     if (!dbUser) {
       throw new Error(`Username "${user.username}" does not exist!`);
