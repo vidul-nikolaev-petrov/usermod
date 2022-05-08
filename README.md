@@ -104,6 +104,7 @@ Usermode.getHome(username);
  * @returns {boolean}
  */
 Usermode.passMatch(username, password);
+```
 
 See more examples in the [unit tests](https://github.com/vidul-nikolaev-petrov/usermode/blob/main/tests/index.test.ts).
 
