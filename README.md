@@ -93,7 +93,17 @@ Usermode.setHome(username);
  * @returns {string | void}
  */
 Usermode.getHome(username);
-```
+
+/**
+ * Check user's password
+ * @function getHome
+ * @memberof Usermode
+ * @static
+ * @param {string} username
+ * @param {string} password
+ * @returns {boolean}
+ */
+Usermode.passMatch(username, password);
 
 See more examples in the [unit tests](https://github.com/vidul-nikolaev-petrov/usermode/blob/main/tests/index.test.ts).
 
