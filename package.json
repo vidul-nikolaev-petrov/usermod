@@ -1,6 +1,6 @@
 {
   "name": "usermode",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "description": "Minimal usermode-like library for node.",
@@ -56,7 +56,6 @@
   },
   "dependencies": {
     "js-sha512": "^0.8.0",
-    "usermode": "^1.1.4",
     "volta": "^0.0.0"
   },
   "repository": {
